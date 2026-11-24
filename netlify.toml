@@ -1,0 +1,19 @@
+# Netlify 部署配置
+# 文档：https://docs.netlify.com/configure-builds/file-based-configuration/
+#
+# Netlify 站点设置中：
+#   - Build command 与 Publish directory 会被本文件覆盖
+#   - 环境变量 NETLIFY=true 由平台自动注入，VitePress base 自动为 '/'
+
+[build]
+  command = "npm run docs:build"
+  publish = ".vitepress/dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# SPA 兜底（cleanUrls 模式下主要作为 404 回退）
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
